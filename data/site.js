@@ -39,5 +39,5 @@ window.SITE = {
   ticker: ["Claude Code", "Codex", "Obsidian", "HyperFrames", "Blender", "Meshy", "Node.js", "Python", "FFmpeg", "Cloudflare", "Midjourney", "Higgsfield", "Kling", "Runway", "VS Code", "Notion"],
   email: "esaietouze@gmail.com",
   linkedin: "https://www.linkedin.com/in/esaietouze",
-  github: "",
+  github: "https://github.com/stouzellc",
 };

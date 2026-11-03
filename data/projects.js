@@ -12,6 +12,7 @@ window.PROJECTS = [
     status: "In daily use.",
     role: "Designed end to end: the routing, the rules, 17 custom skills, 3 custom agents, and the sign-off on every result.",
     tools: ["Claude Code", "Codex", "Skills and agents", "Obsidian (Markdown)"],
+    links: [{ label: "Code: the skills and agents on GitHub", url: "https://github.com/stouzellc/ai-operating-system" }],
     cover: "images/ai-operating-system/chain.jpg",
     video: { src: "videos/making-of.mp4", poster: "videos/making-of-poster.jpg", caption: "The making-of film: this page built on camera, from the first count to the final sign-off. Recorded in OBS, moments picked with NumPy, titles in Remotion, cut in DaVinci Resolve.", alt: "Screen recording of this project page being built and approved, with title cards" },
     system: {
@@ -85,7 +86,7 @@ window.PROJECTS = [
       { src: "images/mphs/gallery.jpg", alt: "Gallery of seven illustrated artworks with filters", caption: "Artwork gallery with filters." },
       { src: "images/mphs/phone.jpg", alt: "The reunion page on mobile", caption: "On mobile.", phone: true },
     ],
-    links: [],
+    links: [{ label: "Code: the platform on GitHub (demo data only)", url: "https://github.com/stouzellc/mphs-committee-platform" }],
     note: "The real site holds classmates' private details, so it isn't public. Everything shown here is a demo with made-up people. A live walkthrough is available on request.",
   },
   {
