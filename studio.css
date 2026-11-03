@@ -1,0 +1,178 @@
+/* Studio map page. Colors per layer come from data/studio.js as --c. */
+:root { --s-shipped: #8fe0b8; --s-inuse: #84bcff; --s-learning: #f5bd5c; --s-planned: #8a958f; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.s-shipped { --s: var(--s-shipped); }
+.s-inuse { --s: var(--s-inuse); }
+.s-learning { --s: var(--s-learning); }
+.s-planned { --s: var(--s-planned); }
+.s-all { --s: var(--ink); }
+
+.studio-hero { padding-top: 80px; padding-bottom: 24px; }
+.studio-hero h1 { font-size: clamp(40px, 7vw, 76px); margin: 0 0 18px; max-width: 14ch; }
+.tally { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 760px; margin-top: 8px; }
+.tally-item { border: 1px solid var(--line); border-top: 3px solid var(--s); border-radius: 12px; padding: 14px 16px; background: var(--surface); display: grid; }
+.tally-n { font-family: var(--serif); font-size: 40px; line-height: 1; color: var(--s); }
+.tally-l { font-weight: 600; margin-top: 6px; }
+.tally-h { font-size: 13px; color: var(--muted); line-height: 1.35; }
+@media (max-width: 640px) { .tally { grid-template-columns: repeat(2, minmax(0, 1fr)); } .studio-hero { padding-top: 48px; } }
+
+/* The engine: steps scroll on the left, the 3D stack stays put on the right. */
+.engine { --gap: 14px; --rx: 58deg; --rz: -42deg; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 32px; }
+.engine:not([data-step="closed"]) { --gap: 60px; }
+.engine[data-step="think"] { --rz: -34deg; }
+.engine[data-step="organize"] { --rz: -40deg; --rx: 60deg; }
+.engine[data-step="create"] { --rz: -46deg; }
+.engine[data-step="systemize"] { --rz: -52deg; --rx: 56deg; }
+.engine[data-step="prove"] { --rz: -58deg; }
+.engine[data-step="you"] { --rz: -45deg; --rx: 62deg; }
+.engine-stage { grid-column: 2; grid-row: 1; position: sticky; top: 64px; align-self: start; height: calc(100vh - 80px); min-height: 520px; }
+.engine-steps { grid-column: 1; grid-row: 1; list-style: none; margin: 0; padding: 0 0 28vh; }
+
+.scene { width: 100%; height: 100%; display: grid; place-items: center; perspective: 1700px; }
+.iso { position: relative; width: 310px; height: 310px; transform-style: preserve-3d; transform: translateY(30px) rotateX(var(--rx)) rotateZ(var(--rz)); transition: transform 1.1s cubic-bezier(.2, .7, .2, 1); }
+
+.plate { --up: 0px; position: absolute; inset: 0; border-radius: 24px; transform-style: preserve-3d;
+  transform: translateZ(calc(var(--i) * var(--gap) + var(--up)));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--c) 26%, #0e1b18), #0b1412 72%);
+  border: 1.5px solid color-mix(in srgb, var(--c) 50%, transparent);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .35), 0 24px 40px rgba(0, 0, 0, .4);
+  transition: transform .9s cubic-bezier(.2, .7, .2, 1), opacity .5s, box-shadow .5s, border-color .5s; }
+.plate-label { position: absolute; left: 18px; top: 10px; font: 700 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--c); }
+.tiles { position: absolute; inset: 32px 18px 18px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; align-content: start; transform-style: preserve-3d; }
+.tile { aspect-ratio: 1; border-radius: 9px; display: grid; place-items: center; font: 700 15px/1 var(--sans); color: var(--ink);
+  border: 1.5px solid color-mix(in srgb, var(--c) 60%, transparent); background: rgba(0, 0, 0, .25);
+  transition: transform .5s cubic-bezier(.2, .8, .2, 1.3) calc(var(--k) * 45ms), box-shadow .5s; }
+.tile.s-shipped { background: var(--c); color: #0b1412; border-color: var(--c); }
+.tile.s-inuse { background: color-mix(in srgb, var(--c) 35%, transparent); }
+.tile.s-learning { border-style: dashed; }
+.tile.s-planned { opacity: .5; border-color: rgba(255, 255, 255, .2); color: var(--muted); }
+
+/* One layer at a time: it lifts, glows and its tiles pop up; the rest step back. */
+.engine[data-step="think"] .plate:not([data-layer="think"]),
+.engine[data-step="organize"] .plate:not([data-layer="organize"]),
+.engine[data-step="create"] .plate:not([data-layer="create"]),
+.engine[data-step="systemize"] .plate:not([data-layer="systemize"]),
+.engine[data-step="prove"] .plate:not([data-layer="prove"]) { opacity: .28; }
+.engine[data-step="think"] .plate[data-layer="think"],
+.engine[data-step="organize"] .plate[data-layer="organize"],
+.engine[data-step="create"] .plate[data-layer="create"],
+.engine[data-step="systemize"] .plate[data-layer="systemize"],
+.engine[data-step="prove"] .plate[data-layer="prove"] { --up: 26px; border-color: var(--c); box-shadow: 0 0 0 1px var(--c), 0 0 60px color-mix(in srgb, var(--c) 55%, transparent); }
+.engine[data-step="think"] [data-layer="think"] .tile,
+.engine[data-step="organize"] [data-layer="organize"] .tile,
+.engine[data-step="create"] [data-layer="create"] .tile,
+.engine[data-step="systemize"] [data-layer="systemize"] .tile,
+.engine[data-step="prove"] [data-layer="prove"] .tile { transform: translateZ(14px); box-shadow: 0 0 18px color-mix(in srgb, var(--c) 45%, transparent); }
+
+/* The beam: a light that runs up through every layer to you. */
+.beam { position: absolute; left: 50%; top: 50%; width: 4px; margin-left: -2px; height: calc(5 * var(--gap) + 34px); transform-origin: top center; transform: rotateX(90deg);
+  background: linear-gradient(to bottom, rgba(143, 224, 184, .05), rgba(143, 224, 184, .55)); overflow: hidden; transition: height .9s cubic-bezier(.2, .7, .2, 1); }
+.beam.b2 { transform: rotateZ(90deg) rotateX(90deg); }
+.beam::after { content: ""; position: absolute; left: 0; right: 0; top: -30%; height: 30%; background: linear-gradient(to bottom, transparent, #fff, transparent); animation: beam-run 2.6s linear infinite; }
+@keyframes beam-run { to { top: 100%; } }
+.you-chip { position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 50%;
+  transform: translateZ(calc(var(--i) * var(--gap) + 34px)); transition: transform .9s cubic-bezier(.2, .7, .2, 1), box-shadow .5s;
+  background: radial-gradient(circle at 35% 30%, #fff, #c9f5dc 45%, #6fd3a2); color: #0b1f17; display: grid; place-content: center; text-align: center;
+  box-shadow: 0 0 30px rgba(143, 224, 184, .45); }
+.you-chip span { font: 700 20px/1 var(--serif); }
+.you-chip small { font: 600 10px/1.2 var(--sans); letter-spacing: .1em; text-transform: uppercase; }
+.engine[data-step="you"] .you-chip { box-shadow: 0 0 0 10px rgba(143, 224, 184, .18), 0 0 90px rgba(143, 224, 184, .85); animation: you-pulse 2s ease-in-out infinite; }
+@keyframes you-pulse { 50% { box-shadow: 0 0 0 18px rgba(143, 224, 184, .08), 0 0 120px rgba(143, 224, 184, 1); } }
+
+.step { min-height: 82vh; display: flex; flex-direction: column; justify-content: center; opacity: .3; transition: opacity .5s; }
+.step:first-child { min-height: 64vh; }
+.step.on { opacity: 1; }
+.step h2 { font-size: clamp(30px, 4vw, 44px); margin: 0 0 12px; color: var(--c, var(--ink)); }
+.step > p { margin: 0 0 18px; color: var(--muted); max-width: 46ch; font-size: 18px; }
+.step-n { font: 700 13px/1 var(--sans) !important; letter-spacing: .16em; color: var(--c, var(--accent)) !important; margin: 0 0 10px !important; }
+.toolchips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.toolchips li { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 5px 12px 5px 10px; font-size: 14px; }
+.toolchips em { font-style: normal; font-size: 12px; color: var(--s); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--s); flex: none; }
+.toolchips .s-learning .dot, .toolchips .s-planned .dot { background: transparent; border: 1.5px solid var(--s); }
+
+/* Phones: the stack sits on top and the steps scroll up over it as cards. */
+@media (max-width: 860px) {
+  .engine { display: block; }
+  .engine:not([data-step="closed"]) { --gap: 40px; }
+  .engine-stage { position: sticky; top: 60px; height: 50vh; min-height: 340px; z-index: 0; }
+  .iso { width: 180px; height: 180px; transform: translateY(40px) rotateX(var(--rx)) rotateZ(var(--rz)); }
+  .tiles { inset: 26px 12px 12px; gap: 6px; }
+  .tile { font-size: 10px; border-radius: 6px; }
+  .plate { border-radius: 18px; }
+  .plate-label { font-size: 9px; left: 12px; top: 8px; }
+  .you-chip { width: 66px; height: 66px; margin: -33px 0 0 -33px; }
+  .you-chip span { font-size: 15px; }
+  .you-chip small { font-size: 8px; }
+  .engine-steps { position: relative; z-index: 2; padding-bottom: 10vh; }
+  .step { min-height: 100vh; justify-content: flex-end; padding-bottom: 4vh; opacity: 1; }
+  .step:first-child { min-height: 70vh; }
+  .toolchips { gap: 6px; }
+  .toolchips li { font-size: 12.5px; padding: 3px 9px 3px 8px; gap: 6px; }
+  .toolchips em { font-size: 11px; }
+  .step > * { position: relative; }
+  .step > p, .step > h2, .step > .toolchips, .step > .step-n { background: color-mix(in srgb, var(--bg) 90%, transparent); }
+  .step > .step-n { padding: 14px 16px 0; margin: 0 !important; border-radius: 14px 14px 0 0; border: 1px solid var(--line); border-bottom: 0; }
+  .step > h2 { padding: 8px 16px 0; margin: 0; border-left: 1px solid var(--line); border-right: 1px solid var(--line); font-size: 28px; }
+  .step > p { padding: 8px 16px 14px; margin: 0; font-size: 16px; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .step > p:last-child { border-radius: 0 0 14px 14px; border-bottom: 1px solid var(--line); }
+  .step > .toolchips { padding: 0 16px 16px; border-radius: 0 0 14px 14px; border: 1px solid var(--line); border-top: 0; }
+}
+
+/* Visitors who turn motion off get the open stack and every step as plain text. */
+.engine.still { --gap: 52px; }
+.engine.still .step { min-height: 0; opacity: 1; padding: 28px 0; justify-content: flex-start; }
+.engine.still .engine-stage { height: 560px; }
+@media (max-width: 860px) { .engine.still { --gap: 34px; } .engine.still .engine-stage { position: relative; top: 0; height: 440px; } .engine.still .iso { transform: translateY(90px) rotateX(var(--rx)) rotateZ(var(--rz)); } }
+@media (prefers-reduced-motion: reduce) {
+  .iso, .plate, .tile, .beam, .you-chip, .step { transition: none !important; }
+  .beam::after, .you-chip, .runner { animation: none !important; }
+}
+
+/* Proof chart */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 18px; }
+.filter { font: 600 14px var(--sans); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.filter::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--s); margin-right: 8px; vertical-align: 1px; }
+.filter[aria-pressed="true"] { border-color: var(--s); background: color-mix(in srgb, var(--s) 18%, transparent); }
+.matrix-wrap { position: relative; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: color-mix(in srgb, var(--surface-solid) 70%, transparent); }
+.matrix { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 14px; }
+.matrix thead th { font: 600 12px/1.3 var(--sans); color: var(--muted); text-align: center; vertical-align: bottom; padding: 14px 8px; border-bottom: 1px solid var(--line); width: 9%; }
+.matrix thead th a { color: var(--ink); text-decoration: none; }
+.matrix thead th a:hover { color: var(--accent); }
+.matrix thead th:first-child { text-align: left; width: auto; }
+.matrix th[scope="row"], .matrix thead th:first-child { position: sticky; left: 0; z-index: 1; background: var(--surface-solid); min-width: 250px; max-width: 320px; }
+.matrix th[scope="row"] { text-align: left; font-weight: 400; padding: 10px 16px; border-left: 3px solid var(--c); }
+.tool-name { font-weight: 600; margin-right: 8px; }
+.tool-what { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.35; margin-top: 3px; }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; color: var(--s); border: 1px solid color-mix(in srgb, var(--s) 50%, transparent); border-radius: 999px; padding: 0 7px; vertical-align: 1px; }
+.matrix td { text-align: center; border-top: 1px solid var(--line); }
+.matrix tbody tr[data-status] th, .matrix tbody tr[data-status] td { border-top: 1px solid var(--line); }
+.matrix tbody tr[data-status]:hover td, .matrix tbody tr[data-status]:hover th { background: color-mix(in srgb, var(--c) 10%, var(--surface-solid)); }
+.hit { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--c); box-shadow: 0 0 12px color-mix(in srgb, var(--c) 70%, transparent); }
+.layer-row th { text-align: left; font: 700 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--c); padding: 18px 16px 8px; background: transparent; position: static; border-top: 1px solid var(--line); }
+
+/* Workflows */
+.flows { display: grid; gap: 22px; }
+.flow { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 20px 22px 22px; }
+.flow h3 { margin: 0 0 4px; font-size: 22px; }
+.flow-note { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+.chain-wrap { position: relative; overflow: hidden; padding-top: 14px; border-top: 1px solid var(--line); }
+.chain { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.node { position: relative; display: grid; border-left: 3px solid var(--c); padding: 4px 0 4px 12px; font-size: 15px; }
+.node.you { border-left-color: #fff; --c: #fff; }
+.node-l { font: 700 11px/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--c); }
+.node:not(:last-child)::after { content: "→"; position: absolute; right: -21px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.runner { position: absolute; top: -1px; left: -90px; width: 90px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: run 3.4s linear infinite; }
+@keyframes run { to { left: 100%; } }
+
+/* Roadmap */
+.road { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 16px; }
+.road-step { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 18px 20px; display: grid; align-content: start; gap: 6px; }
+.road-n { font: 700 12px var(--sans); letter-spacing: .14em; color: var(--muted); }
+.road-step h3 { margin: 0; font-size: 21px; }
+.road-s { justify-self: start; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 1px 9px; color: var(--s-learning); border: 1px solid color-mix(in srgb, var(--s-learning) 50%, transparent); }
+.r-held .road-s { color: var(--s-planned); border-color: rgba(255, 255, 255, .2); }
+.r-done .road-s { color: var(--s-shipped); border-color: color-mix(in srgb, var(--s-shipped) 50%, transparent); }
+.road-step p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+.choosing { margin-top: 28px; }
+

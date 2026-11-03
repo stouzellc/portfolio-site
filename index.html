@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Esaie Touze · Portfolio</title>
+  <meta name="description" content="Esaie Touze: creative direction, interactive sites and AI-built working tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Esaie Touze">
+  <meta property="og:title" content="Esaie Touze · Portfolio">
+  <meta property="og:description" content="Creative direction, interactive sites and AI-built working tools.">
+  <meta property="og:url" content="https://esaie-touze.pages.dev/">
+  <meta property="og:image" content="https://esaie-touze.pages.dev/images/og/preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Esaie Touze: the name in large white type on a dark green and violet glow, with a work log beside it">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data/site.js" defer></script>
+  <script src="data/projects.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="home">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="./" aria-label="Esaie Touze, home">E<b></b>T</a>
+      <nav aria-label="Main">
+        <a href="./#work">Work</a>
+        <a href="studio.html">Studio</a>
+        <a href="./#about">About</a>
+        <a href="./#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap">
+      <div class="reveal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="hero-tag" data-site="tag">Creative direction · AI-built tools</p>
+      <h1 class="giant fit" data-site="name">Esaie Touze</h1>
+      <div class="hero-intro">
+        <figure class="worklog" aria-label="Work log: how this site was built">
+          <figcaption><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>work log · how this site was built</figcaption>
+          <ol id="worklog"></ol>
+        </figure>
+        <p class="headline" data-site="headline"></p>
+        <p class="lede" data-site="intro"></p>
+      </div>
+    </section>
+
+    <div class="wrap"><hr class="rule"></div>
+
+    <p class="wrap mobile-id" aria-hidden="true">Esaie Touze <span>Creative direction · AI-built tools</span></p>
+    <section class="wrap proof" aria-label="Proof in numbers">
+      <ul class="sys-counts">
+        <li><strong>7</strong><span>projects shipped end to end</span></li>
+        <li><strong>17</strong><span>custom AI skills, plus 3 agents</span></li>
+        <li><strong>131</strong><span>automated tests passing on the MPHS site</span></li>
+      </ul>
+    </section>
+
+    <section class="wrap section duo" aria-label="Skills and toolkit">
+      <div>
+        <h2>Skills</h2>
+        <ul class="rows" id="skills"></ul>
+      </div>
+      <div>
+        <h2>Toolkit</h2>
+        <ul class="rows" id="toolkit"></ul>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+    <section id="work" class="wrap section" aria-labelledby="work-h">
+      <h2 id="work-h" class="section-h">Work</h2>
+      <div class="grid" id="project-grid"></div>
+      <noscript><p>Turn on JavaScript to see the projects.</p></noscript>
+    </section>
+
+    <section id="studio" class="wrap section" aria-labelledby="studio-h">
+      <a class="studio-band" href="studio.html">
+        <span>
+          <span class="band-kicker">Studio map · 35 tools</span>
+          <h2 id="studio-h">The team behind <em>the work</em></h2>
+          <span class="band-p">One director, five layers, an AI team, and a human sign-off on every release. Open the stack and see what has actually shipped.</span>
+          <span class="band-chips" aria-hidden="true"><span>Think</span><span>Organize</span><span>Create</span><span>Systemize</span><span>Prove</span></span>
+          <span class="band-cta">Open the studio map <span aria-hidden="true">→</span></span>
+        </span>
+        <span class="discs" aria-hidden="true">
+          <span class="disc-tilt"><span class="disc-scene"><span class="disc-beam"></span><i></i><i></i><i></i><i></i><i></i><b></b></span></span>
+          <span class="disc-tag"><strong>22</strong>tools shipped</span>
+        </span>
+      </a>
+    </section>
+
+    <div class="wrap"><hr class="rule"></div>
+
+    <section id="about" class="wrap section about-grid" aria-labelledby="about-h">
+      <h2 id="about-h" class="section-h">About</h2>
+        <figure class="about-photo"><img src="images/about/portrait.jpg" alt="Esaie Touze in a beret and turtleneck, a studio portrait tinted violet" width="900" height="1124" loading="lazy"><figcaption>Photo: MoFlicks</figcaption></figure>
+      <div id="about-text" class="prose"></div>
+    </section>
+
+    <div class="wrap"><hr class="rule"></div>
+
+    <section id="contact" class="wrap section contact-grid" aria-labelledby="contact-h">
+      <div>
+        <p class="eyebrow">Let's collaborate</p>
+        <h2 id="contact-h" class="contact-big"><span>Walk through</span> <span>the work with me</span></h2>
+        <div class="contact-btns"><a class="btn" id="email-btn" href="mailto:esaietouze@gmail.com">Email me</a><a class="btn ghost" href="https://www.linkedin.com/in/esaietouze" target="_blank" rel="noopener">LinkedIn</a></div>
+      </div>
+      <ul class="contact-links" id="contact-links"></ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <hr class="rule">
+      <p class="giant fit" aria-hidden="true">Esaie Touze</p>
+      <div class="foot-cols">
+        <a class="brand" href="./" aria-label="Esaie Touze, home">E<b></b>T</a>
+        <ul><li><a href="./#work">Work</a></li><li><a href="studio.html">Studio</a></li><li><a href="./#about">About</a></li></ul>
+        <ul><li><a href="mailto:esaietouze@gmail.com">Email</a></li><li><a href="https://www.linkedin.com/in/esaietouze" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="./#contact">Contact</a></li></ul>
+      </div>
+      <p class="foot-small">© <span id="year"></span> Esaie Touze. Screenshots of private tools use demo or example data only.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Esaie Touze · Studio map</title>
+  <meta name="description" content="The tools, AI partners and workflows behind Esaie Touze's projects, and which ones have shipped real work.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Esaie Touze">
+  <meta property="og:title" content="Esaie Touze · Studio map">
+  <meta property="og:description" content="The tools behind the work: what's shipped, what's in use, and how honest each claim is.">
+  <meta property="og:url" content="https://esaie-touze.pages.dev/studio">
+  <meta property="og:image" content="https://esaie-touze.pages.dev/images/og/preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Esaie Touze: the name in large white type on a dark green and violet glow, with a work log beside it">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="studio.css">
+  <script src="data/site.js" defer></script>
+  <script src="data/projects.js" defer></script>
+  <script src="data/studio.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="studio.js" defer></script>
+</head>
+<body data-page="studio">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="./" aria-label="Esaie Touze, home">E<b></b>T</a>
+      <nav aria-label="Main">
+        <a href="./#work">Work</a>
+        <a href="studio.html" aria-current="page">Studio</a>
+        <a href="./#about">About</a>
+        <a href="./#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap studio-hero">
+      <p class="eyebrow">Studio map</p>
+      <h1>The team behind the work.</h1>
+      <p class="lede" id="studio-intro"></p>
+      <div class="tally" id="tally" aria-label="How many tools are at each stage"></div>
+    </section>
+
+    <section class="wrap engine" aria-label="The five layers of the studio">
+      <div class="engine-stage" aria-hidden="true">
+        <div class="scene">
+          <div class="iso" id="iso"></div>
+        </div>
+      </div>
+      <ol class="engine-steps" id="engine-steps"></ol>
+    </section>
+
+    <section class="wrap section" aria-labelledby="proof-h">
+      <h2 id="proof-h" class="section-h">Proof chart</h2>
+      <p class="prose">Every tool in real use, and every project it shipped in. Pick a stage to filter. A dot means the tool was used in that project.</p>
+      <div class="filters" id="filters" role="group" aria-label="Filter tools by stage"></div>
+      <div class="matrix-wrap" tabindex="0" aria-label="Tools by project chart, scrolls sideways on small screens">
+        <table class="matrix" id="matrix"></table>
+      </div>
+    </section>
+
+    <section class="wrap section" aria-labelledby="flows-h">
+      <h2 id="flows-h" class="section-h">How the work moves</h2>
+      <div class="flows" id="flows"></div>
+    </section>
+
+    <section class="wrap section" aria-labelledby="road-h">
+      <h2 id="road-h" class="section-h">What's next</h2>
+      <div class="road" id="road"></div>
+      <aside class="note choosing"><p><strong>How tools get chosen.</strong> <span id="choosing"></span></p></aside>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <hr class="rule">
+      <p class="giant fit" aria-hidden="true">Esaie Touze</p>
+      <div class="foot-cols">
+        <a class="brand" href="./" aria-label="Esaie Touze, home">E<b></b>T</a>
+        <ul><li><a href="./#work">Work</a></li><li><a href="studio.html">Studio</a></li><li><a href="./#about">About</a></li></ul>
+        <ul><li><a href="mailto:esaietouze@gmail.com">Email</a></li><li><a href="https://www.linkedin.com/in/esaietouze" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="./#contact">Contact</a></li></ul>
+      </div>
+      <p class="foot-small">© <span id="year"></span> Esaie Touze. Tool names belong to their owners. Statuses reflect work that can be shown or verified.</p>
+    </div>
+  </footer>
+</body>
+</html>
